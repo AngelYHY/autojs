@@ -4,7 +4,6 @@ auto.waitFor();
 var Maid = require("./MyMaid.js");
 var maid = new Maid();
 
-var count = 0;
 sign()
 
 function sign() {
@@ -24,9 +23,6 @@ function sign() {
         vs.forEach(element => {
             var str = element.findOne(id("com.alipay.mobile.bill.list:id/timeInfo1")).text()
                 + "," + element.findOne(id("com.alipay.mobile.bill.list:id/timeInfo2")).text();
-            // log(str + "--" + element)
-            // var v = element.findOne(id("com.alipay.mobile.bill.list:id/billAmount"))
-            // log(v.text())
             arr.push({
                 content: element.findOne(id("com.alipay.mobile.bill.list:id/billAmount")).text(),
                 date: str,
@@ -51,64 +47,26 @@ function sign() {
 }
 
 function go() {
-    count++;
     maid.resetOpenAuto()
     log("我要开始执行了 这是更新版本哦")
 
     log(launchApp("支付宝"));
 
     var t = id("com.alipay.android.phone.wealth.home:id/sigle_tab_bg").findOne(5000)
-    if (!t) {
-        log("没找到 进来了" + count)
-        if (count > 5) {
-            home()
-            exit();
-        }
-        reset()
-        exit();
-    }
-    sleep(1000)
     t.click();
-    maid.clickCenter(t)
     sleep(3000)
-
-    log("点击成功")
-
     var b = id("com.alipay.mobile.antui:id/list_layout").find()
-    var vs = b;
-    count = 0;
-    while (vs.empty()) {
-        t.click();
-        maid.clickCenter(t)
-        sleep(3000)
-        vs = id("com.alipay.mobile.antui:id/list_layout").find();
-        if (count > 5) {
-            exit()
-        }
-        count++;
-    }
     b = b[2];
-    log(b + "---2")
-    // sleep(1000)
-    b.click();
+    // sleep(3000)
+    log(b);
     maid.clickCenter(b)
     sleep(3000)
-
-    log("找到了 ")
-    t = b;
-    log(t)
-    log(b);
-    while (!b) {
-        log("没找到" + t)
-        maid.clickCenter(t)
-        sleep(1000)
-    }
 }
 
-function reset() {
-    maid.reset();
-    sign()
-}
+// function reset() {
+//     maid.reset();
+//     sign()
+// }
 
 
 
