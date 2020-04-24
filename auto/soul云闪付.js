@@ -15,6 +15,8 @@ unlock.unlock();
 // log(maid.clickCenter(btn))
 
 // maid.getThreeImg()
+maid.resetOpenAuto()
+
 sign()
 // maid.getCaptureImg()
 
@@ -23,11 +25,13 @@ sign()
 // back();
 
 function sign() {
-    maid.openAuto()
+    maid.sleepOpenAuto();
     log("我要开始执行了")
-    launchApp("Soul");
+
+    log(launchApp("Soul"));
 
     var t = text("自己").findOne(10000);
+
     if (!maid.clickCenter(t)) {
         reset()
         exit();
@@ -41,10 +45,10 @@ function sign() {
         exit();
     }
 
-    sleep(2000);
+    sleep(5000);
     click(900, 1050)
 
-    maid.sleepOpenAuto()
+    maid.resetOpenAuto()
 
     launchApp("云闪付")
 
@@ -60,11 +64,9 @@ function sign() {
         }
         
     }
-    maid.clickPointRight(btn);
-
-    maid.sleepOpenAuto()
-    maid.clear()
-    home()
+    maid.clickCenter(btn);
+    
+    maid.reset()
 }
 
 function reset() {

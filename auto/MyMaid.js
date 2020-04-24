@@ -37,10 +37,10 @@ function MyMaid(packageName) {
         return click(x, y);
     };
     this.clickCenter = function (widget) {
-        log(widget)
         if (!widget)
             return false;
         let rect = widget.bounds();
+        log(widget + "++clickCenter")
         return click(rect.centerX(), rect.centerY());
     };
 
@@ -198,33 +198,114 @@ function MyMaid(packageName) {
         }
     };
 
+    // this.openAuto = function openAuto(count) {
+    //     recents()
+    //     var t = text("Auto.js").findOne(5000);
+    //     if (!this.clickCenter(t)) {
+    //         var widget = descContains("Auto").findOne(5000);
+    //         log(this.clickCenter(widget) + "+++")
+    //     };
+    //     // if(count==1){
+    //     //     var widget = descContains("Auto").findOne(5000);
+    //     //     this.clickCenter(widget)
+    //     // }else{
+    //     //     var widget = text("Auto.js").findOne(5000);
+    //     //     this.clickCenter(widget)
+    //     // }
+    //     log(t);
+    //     sleep(2000);
+    //     log("睡觉结束")
+
+    //     recents()
+    //     launchApp("Auto.js")
+    //     var b = id("action_log");
+    //     if (!b.findOne(2000)) {
+    //         this.openAuto()
+    //     }
+    //     if (!b.findOne(2000)) {
+    //         log("没有打开成功")
+    //         exit();
+    //     }
+    // }
+
     this.openAuto = function openAuto() {
+        launchApp("Auto.js")
+        sleep(2000);
+        var b = id("action_log");
+        if (!b.findOne(2000)) {
+            recents()
+            var t = text("Auto.js").findOne(5000);
+            if (!this.clickCenter(t)) {
+                var widget = descContains("Auto").findOne(5000);
+                log(this.clickCenter(widget) + "+++")
+            };
+            sleep(2000);
+            if (!b.findOne(2000)) {
+                log("没有打开成功")
+                exit();
+            }
+        }
+    }
+
+    this.recentOpenAuto = function recentOpenAuto() {
         recents()
         var t = text("Auto.js").findOne(5000);
-        this.clickCenter(t);
+        if (!this.clickCenter(t)) {
+            var widget = descContains("Auto").findOne(5000);
+            log(this.clickCenter(widget) + "+++")
+        };
         sleep(2000);
+        var b = id("action_log");
+        if (!b.findOne(2000)) {
+            launchApp("Auto.js")
+            sleep(2000);
+            if (!b.findOne(2000)) {
+                log("没有打开成功")
+                exit();
+            }
+        }
     }
 
     this.sleepOpenAuto = function sleepOpenAuto() {
         sleep(1000);
-        this.openAuto()
-        this.clear();
+        launchApp("Auto.js")
         sleep(1000);
+    }
+
+    this.resetOpenAuto = function resetOpenAuto() {
+        sleep(1000);
+        this.recentOpenAuto()
+        this.clear();
+        // sleep(10000);
+        // launchApp("Auto.js")
         this.openAuto()
+        sleep(1000);
     }
 
     this.clear = function clear() {
         recents()
         var cav = id("clearAnimView").findOne(5000);
-        var b = cav.bounds();
-        sleep(1000);
         this.clickCenter(cav);
+        sleep(1000);
     }
 
     this.reset = function reset() {
-        this.sleepOpenAuto()
-        this.clear()
+        sleep(1000);
+        this.openAuto()
+        this.clear();
         home()
+    }
+
+    this.openAutoCheck = function openAutoCheck() {
+        launchApp("Auto.js")
+        var b = id("action_log");
+        if (!b.findOne(2000)) {
+            this.openAuto()
+        }
+        if (!b.findOne(2000)) {
+            log("没有打开成功")
+            exit();
+        }
     }
 
     this.getImg = function getImg(path) {
@@ -240,7 +321,13 @@ function MyMaid(packageName) {
     }
 
     this.reqCapture = function reqCapture() {
-        this.openAuto()
+        // this.sleepOpenAuto()
+        // var b = id("action_log");
+        // while (!b.findOne(2000)) {
+        //     log("一直在点")
+        //     this.sleepOpenAuto()
+        // }
+        this.openAutoCheck()
         // 截图权限申请
         threads.start(function () {
             var beginBtn;

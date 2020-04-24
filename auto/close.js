@@ -1,13 +1,34 @@
 "auto";
 
-var tt = desc("收款二维码").findOne(5000);
-if (!tt) {
-    // reset();
-    // exit();
-    log("没有")
+// var b=desc("朋友").findOne(4000);
+// log(b.selected());
+
+// var vs=id("com.alipay.mobile.socialwidget:id/recent_list").findOne(2000)
+var vs = id("com.alipay.mobile.socialwidget:id/item_memo").find();
+if(vs){
+    log(vs.length);
 }else{
-    log("有哦")
+    log("null")
 }
+// if (!vs&&vs.empty()) {
+//     log("没找到╭(╯^╰)╮")
+// } else {
+//     log("找到啦")
+//     log(vs.length());
+//     // vs.forEach(element => {
+//     //     log(element)
+//     // });
+// }
+// launchApp("Soul");
+
+// var tt = desc("收款二维码").findOne(5000);
+// if (!tt) {
+//     // reset();
+//     // exit();
+//     log("没有")
+// }else{
+//     log("有哦")
+// }
 
 // log("开始");
 // var result = shell("am force-stop com.tencent.mm", true);
@@ -20,9 +41,10 @@ if (!tt) {
 //   toast("执行失败！请到控制台查看错误信息");
 //   log("执行失败！请到控制台查看错误信息");
 // }
-let current_e_id = engines.myEngine().id;
-log(current_e_id);
-log(engines.all());
+
+// let current_e_id = engines.myEngine().id;
+// log(current_e_id);
+// log(engines.all());
 
 // log(engines.myEngine().getSource());
 
