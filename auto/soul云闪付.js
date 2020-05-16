@@ -55,9 +55,9 @@ function sign() {
     var sign = id("frog_float_notgif").findOne(8000);
     maid.clickCenter(sign);
 
-    var btn = className("android.widget.TextView").text("签到").findOne(3000);
+    var btn = className("android.widget.TextView").text("立即签到").findOne(3000);
     if(!btn){
-        var btn = className("android.widget.TextView").text("今日已签到").findOne(3000);
+        var btn = className("android.widget.TextView").text("已签到").findOne(3000);
         if(!btn){
             reset();
             exit();

@@ -1,15 +1,47 @@
 "auto";
 
+var Maid = require("./MyMaid.js");
+var maid = new Maid();
+
+let {
+    clickAction, swipeAndShow, setIntervalBySetTimeout, keycode,
+    getSelector, equalObjects, waitForAndClickAction, runJsFile,
+    messageAction, debugInfo, killThisApp, clickActionsPipeline,
+    waitForAction, baiduOcr, launchThisApp, observeToastMessage,
+    showSplitLine, classof, timeRecorder, surroundWith,
+} = require("./MODULE_MONSTER_FUNC");
+
+killThisApp("一淘", {
+    shell_acceptable: false,
+    debug_info_flag: "forcible",
+});
+
+// killThisApp("支付宝")
+
+// var btn =id("com.taobao.etao:id/is_status_loading_image_view").findOne(1000);
+// log(btn)
+// maid.clickCenter(btn);
+// sleep(5000)
+// var vs = textStartsWith("收集能量").find();
+// log(vs.length)
+// vs.forEach(element => {
+//     log(element)
+//     maid.clickCenter(element);
+// });
+
+// var url="https://render.alipay.com/p/s/i?scheme=alipays://platformapi/startapp?appId=2018100961599704&page=pages/transfer/transfer?amount=100&chInfo=moneyBox&frontBizNo=&remark=2020dd04346509910&uid=2088802152486721";
+// log(encodeURIComponent(encodeURIComponent(url)));
+
 // var b=desc("朋友").findOne(4000);
 // log(b.selected());
 
 // var vs=id("com.alipay.mobile.socialwidget:id/recent_list").findOne(2000)
-var vs = id("com.alipay.mobile.socialwidget:id/item_memo").find();
-if(vs){
-    log(vs.length);
-}else{
-    log("null")
-}
+// var vs = id("com.alipay.mobile.socialwidget:id/item_memo").find();
+// if(vs){
+//     log(vs.length);
+// }else{
+//     log("null")
+// }
 // if (!vs&&vs.empty()) {
 //     log("没找到╭(╯^╰)╮")
 // } else {

@@ -39,7 +39,7 @@ function sign() {
         sleep(1000)
     }
 
-    log("找到了 ")
+    // log("找到了 ")
 
     var vs = id("com.alipay.mobile.socialwidget:id/content_layout").find();
     // log(cl[0])
@@ -60,21 +60,20 @@ function sign() {
     if (vs.empty()) {
         log("没找到╭(╯^╰)╮")
     } else {
-
-        log("找到啦")
         let arr = []
         vs.forEach(element => {
             arr.push({
                 content: element.findOne(id("com.alipay.mobile.socialwidget:id/item_memo")).text(),
                 date: element.findOne(id("com.alipay.mobile.socialwidget:id/item_date")).text(),
+                from: element.findOne(id("com.alipay.mobile.socialwidget:id/item_name")).text()
             });
         });
 
-        log(arr)
+        // log(arr)
 
-        var file = "/sdcard/AutoFile/alipay.txt";
-        files.createWithDirs(file)
-        files.append(file, JSON.stringify(arr));
+        // var file = "/sdcard/AutoFile/alipay.txt";
+        // files.createWithDirs(file)
+        // files.append(file, JSON.stringify(arr));
 
         // //用其他应用查看文件
         // app.viewFile(file);
@@ -85,7 +84,8 @@ function sign() {
         // });
         // log(r.body.string());
     }
-    home();
+
+    // home();
 }
 
 function reset() {

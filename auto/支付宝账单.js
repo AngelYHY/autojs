@@ -31,9 +31,9 @@ function sign() {
 
         log(arr)
 
-        // var file = "/sdcard/AutoFile/alipay.txt";
-        // files.createWithDirs(file)
-        // files.append(file, JSON.stringify(arr));
+        var file = "/sdcard/AutoFile/alipay.txt";
+        files.createWithDirs(file)
+        files.write(file, JSON.stringify(arr));
 
         // //用其他应用查看文件
         // app.viewFile(file);

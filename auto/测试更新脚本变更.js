@@ -1,5 +1,15 @@
 "auto";
 
+var s=new Date().getTime()
+sleep(3000);
+var t=new Date().getTime()
+log((t-s))
+
+var MyUrl = require("./MyUrl.js");
+var myUrl = new MyUrl();
+var storage = storages.create(myUrl.msgKey);
+storage.remove(myUrl.msgContentKey)
+
 // swipe(device.width / 2, device.height / 4,
 //     device.width / 2, device.height, 300);
 
