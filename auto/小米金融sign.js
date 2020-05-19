@@ -15,12 +15,22 @@ let {
 maid.before();
 unlock.unlock();
 
-launchThisApp("小米商城")
-var my = id("com.xiaomi.shop.plugin.homepage:id/main_bottom_mine").findOne(2000);
-if (my) {
-    maid.clickCenter(my);
-    var btn = id("com.xiaomi.shop.plugin.homepage:id/usercentral_listheader_point_layout").findOne(5000);
-    if(btn){
-        maid.clickCenter(btn);
+
+launchThisApp("小米金融")
+
+log("1")
+if (waitForAndClickAction(text("每日签到"), 10e3, 80)) {
+    sleep(2000);
+    log("2")
+    log(waitForAndClickAction(text("每日签到"), 10e3, 80))
+    sleep(2000);
+    var b=text("明日签到").findOne();
+    if(!b){
+        waitForAndClickAction(text("签到"), 10e3, 80)
+    }else{
+        log("直接结束咯")
     }
 }
+
+killThisApp("小米金融",{debug_info_flag: "forcible"});
+

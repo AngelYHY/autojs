@@ -1,5 +1,12 @@
 "auto";
 
+let b=className("android.widget.TextView").textEndsWith("签到").find();
+log(b[0])
+b.forEach(element => {
+    log(element)
+});
+
+
 // var url = "http://192.168.1.166:7070/wep/api/systemUser/login";
 // r = http.postJson(url, {
 //     "password": "string",
@@ -34,22 +41,22 @@
 // auto.waitFor();
 // log("通过了")
 
-var sign = id("frog_float_notgif")
-// .className("android.widget.ImageView").clickable(true).depth(6).
-.findOne(2000);
-if (sign != null) {
-    log("click")
-    clickPointRight(sign);
-} else {
-    log("null")
-}
+// var sign = id("frog_float_notgif")
+// // .className("android.widget.ImageView").clickable(true).depth(6).
+// .findOne(2000);
+// if (sign != null) {
+//     log("click")
+//     clickPointRight(sign);
+// } else {
+//     log("null")
+// }
 
 
 
-function clickPointRight(btn) {
-    log(btn);
-    var b = btn.bounds();
-    log(b);
-    log(b.centerX() + "--" + b.centerY())
-    click(b.right-20, b.centerY());
-}
+// function clickPointRight(btn) {
+//     log(btn);
+//     var b = btn.bounds();
+//     log(b);
+//     log(b.centerX() + "--" + b.centerY())
+//     click(b.right-20, b.centerY());
+// }

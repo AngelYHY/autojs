@@ -11,10 +11,42 @@ let {
     showSplitLine, classof, timeRecorder, surroundWith,
 } = require("./MODULE_MONSTER_FUNC");
 
-killThisApp("一淘", {
-    shell_acceptable: false,
-    debug_info_flag: "forcible",
-});
+// var btn=id("com.dotcore.yypay:id/qrcode_img").findOne(2000)
+// var btn=id("com.taobao.etao:id/home_views_circle_nav_item_image").findOne(2000)
+// .find(className("android.widget.ImageView"))
+// // .className("android.widget.ImageView")
+// // .findOne(2000)
+// log(btn)
+
+shell("screencap /sdcard/照片/screen.png");
+
+// requestScreenCapture();
+// captureScreen("/sdcard/照片/" + new Date().getTime() + ".png");
+
+// //循环找色，找到红色(#ff0000)时停止并报告坐标
+// // while(true){
+//     // var img = captureScreen("/sdcard/"+new Date().getTime()+".png");
+//     var img = images.read("/sdcard/照片/1.png");
+//     var point = findColor(img, "#ceff5f");
+//     if(point){
+//         toast("找到红色，坐标为(" + point.x + ", " + point.y + ")");
+//         log("找到红色，坐标为(" + point.x + ", " + point.y + ")")
+//     }else{
+//         log("没找到")
+//     }
+// // }
+
+// log(5e3)
+
+// var btn =text("点我签到领钱").findOne(2000);
+// log(btn)
+
+// log(launchApp("Soul"))
+
+// killThisApp("一淘", {
+//     shell_acceptable: false,
+//     debug_info_flag: "forcible",
+// });
 
 // killThisApp("支付宝")
 

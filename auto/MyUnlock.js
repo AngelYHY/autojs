@@ -23,8 +23,9 @@ function MyUnlock() {
         desc(2).findOne().click();
         desc(9).findOne().click();
 
+        sleep(2000)
         //等待解锁完成，返回并退出
-        back();
+        home();
     }
 }
 
