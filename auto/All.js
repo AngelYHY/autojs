@@ -17,6 +17,10 @@ let {
 } = require("./云闪付");
 
 let {
+    fjdzz
+} = require("./黄金大作战");
+
+let {
     soul
 } = require("./soul");
 
@@ -27,5 +31,6 @@ let {
 ysf();
 soul();
 yitao();
+fjdzz();
 
 log("还会执行吗？")

@@ -1,10 +1,20 @@
 "auto";
 
-let b=className("android.widget.TextView").textEndsWith("签到").find();
-log(b[0])
-b.forEach(element => {
-    log(element)
-});
+// while(1){
+//     swipe(device.width / 2, device.height-500,
+//         device.width / 2, device.height/4, 300);
+// }
+
+
+let rv=id("android:id/list").findOne(2000)
+log(rv.childCount())
+
+
+// let b=className("android.widget.TextView").textEndsWith("签到").find();
+// log(b[0])
+// b.forEach(element => {
+//     log(element)
+// });
 
 
 // var url = "http://192.168.1.166:7070/wep/api/systemUser/login";
