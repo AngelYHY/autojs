@@ -26,6 +26,10 @@ function sign() {
     waitForAndClickAction(id("frog_float_notgif"), 10e3, 80)
     sleep(2000);
     let b = textEndsWith("签到").find();
+    if (b.size() < 1) {
+        reset();
+        return;
+    }
     let btn = b[0];
     log(btn)
     if (btn.text() == "立即签到" || btn.text() == "签到") {

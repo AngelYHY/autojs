@@ -28,13 +28,7 @@ function sign() {
         maid.clickCenter(close);
     }
 
-    // var btn = id("com.taobao.etao:id/is_status_loading_image_view").findOne(20000);
     waitForAndClickAction(id("com.taobao.etao:id/is_status_loading_image_view"), 10e3, 80)
-
-    // sleep(1000)
-    // maid.clickCenter(btn);
-    // sleep(2000)
-
 
     sleep(2000)
     var b = text("邀请赚集分宝").findOne(2000);
@@ -46,6 +40,13 @@ function sign() {
         // }
         sleep(1000)
     }
+    let bx=text("点我开宝箱").findOne(2000)
+    if(bx){
+        maid.clickCenter(bx);
+        sleep(1000)
+        click(500,1200)
+        sleep(1000)
+    }
     var b = text("邀请赚集分宝").findOne(2000);
     if(!b){
         reset()
@@ -53,7 +54,7 @@ function sign() {
     }
     // }
 
-    killThisApp(name);
+    killThisApp(name, { debug_info_flag: "forcible", });
 
 }
 

@@ -1,13 +1,23 @@
 "auto";
 
+let b=textStartsWith("+").find();
+b.forEach(element => {
+    // log(element)
+    element.click()
+    sleep(4)
+});
+
+// let b=id("J_openBox").findOne(2000)
+// log(b)
+
 // while(1){
 //     swipe(device.width / 2, device.height-500,
 //         device.width / 2, device.height/4, 300);
 // }
 
 
-let rv=id("android:id/list").findOne(2000)
-log(rv.childCount())
+// let rv=id("android:id/list").findOne(2000)
+// log(rv.childCount())
 
 
 // let b=className("android.widget.TextView").textEndsWith("签到").find();
