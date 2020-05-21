@@ -38,18 +38,7 @@ function sign() {
         back();
         sleep(1000)
     }
-
-    // let b = textStartsWith("+").find();
-    // log(b.size())
-    // b.forEach(element => {
-    //     log(element)
-    //     maid.clickCenter(element);
-    //     sleep(4000)
-    //     waitForAndClickAction(text("立即领取"), 10e3, 80)
-    //     back();
-    //     sleep(1000)
-    // });
-
+    
     restartThisApp(name)
     waitForAndClickAction(id("com.alipay.android.widget.fortunehome:id/tab_description"), 10e3, 80)
     log("1")
