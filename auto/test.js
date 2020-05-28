@@ -1,11 +1,22 @@
 "auto";
+let {
+    clickAction, swipeAndShow, setIntervalBySetTimeout, keycode,
+    getSelector, equalObjects, waitForAndClickAction, runJsFile,
+    messageAction, debugInfo, killThisApp, clickActionsPipeline,
+    waitForAction, baiduOcr, launchThisApp, restartThisApp, observeToastMessage,
+    showSplitLine, classof, timeRecorder, surroundWith,
+} = require("./MODULE_MONSTER_FUNC");
 
-let b=textStartsWith("+").find();
-b.forEach(element => {
-    // log(element)
-    element.click()
-    sleep(4)
-});
+launchThisApp("我的小程序")
+
+// log(80e3)
+
+// let b=textStartsWith("+").find();
+// b.forEach(element => {
+//     // log(element)
+//     element.click()
+//     sleep(4)
+// });
 
 // let b=id("J_openBox").findOne(2000)
 // log(b)

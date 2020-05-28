@@ -16,7 +16,7 @@ let {
 var count = 0;
 let name = "支付宝";
 
-sign();
+// sign();
 
 function sign() {
     home();
@@ -25,6 +25,12 @@ function sign() {
         condition_launch: () => id("com.alipay.android.widget.fortunehome:id/tab_description").findOne(2000)
     })
     sleep(2000)
+    // var bt=text("我的小程序").findOne().parent().parent()
+    // log(bt)
+    // maid.clickCenter(bt);
+    waitForAndClickAction(desc("最近使用"), 10e3, 80)
+    // var bt = text("我的小程序").findOne().parent().parent()
+    // log(bt)
     waitForAndClickAction(text("我的小程序"), 10e3, 80)
     sleep(2000)
     waitForAndClickAction(text("发现"), 10e3, 80)
@@ -35,10 +41,11 @@ function sign() {
         maid.clickCenter(b);
         sleep(4000)
         waitForAndClickAction(text("立即领取"), 10e3, 80)
-        back();
         sleep(1000)
+        back();
+        sleep(2000)
     }
-    
+
     restartThisApp(name)
     waitForAndClickAction(id("com.alipay.android.widget.fortunehome:id/tab_description"), 10e3, 80)
     log("1")
@@ -50,14 +57,25 @@ function sign() {
     waitForAndClickAction(id("com.alipay.android.phone.wealth.home:id/tab_description"), 10e3, 80)
     waitForAndClickAction(text("支付宝会员"), 10e3, 80)
     waitForAndClickAction(text("领积分"), 10e3, 80)
+    sleep(2000)
+
     b = null;
     while ((b = text("点击领取").findOne("2000")) != null) {
+        maid.clickCenter(b);
+        sleep(2000)
+    }
+    sleep(2000);
+    log(waitForAndClickAction(textStartsWith("家庭积分"), 10e3, 80))
+    sleep(2000);
+    b = null;
+    while ((b = className("android.widget.Button").textStartsWith("领取").findOne("2000")) != null) {
         maid.clickCenter(b);
         sleep(2000)
     }
 
     killThisApp(name, { debug_info_flag: "forcible", });
 
+    maid.clear();
 }
 
 function reset() {

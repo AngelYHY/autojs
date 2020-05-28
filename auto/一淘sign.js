@@ -23,6 +23,7 @@ function sign() {
     home();
     launchThisApp(name)
     sleep(4000);
+    waitForAndClickAction(text("狠心放弃"), 5e3, 80)
     var close = id("com.taobao.etao:id/home_market_close").findOne(2000);
     if (close) {
         maid.clickCenter(close);
