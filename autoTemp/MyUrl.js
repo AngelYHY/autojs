@@ -12,8 +12,6 @@ function MyUrl() {
 
     this.nongshang = "ns"
 
-    this.nsvertion = "nsvertion"
-
     this.nongshangUrl = "http://192.168.1.166:7070/yhm/api/";
 
     this.alive = 1;

@@ -2,16 +2,13 @@
 var MyUrl = require("./MyUrl.js");
 var myUrl = new MyUrl();
 
-var storage = storages.create(myUrl.nongshang);
+var file = "/sdcard/AutoFile/version.txt";
 
 var url = myUrl.baseUrl + "sysSetting/version";
-
 r = http.get(url);
 var str = r.body.json();
 var newVer = str.data
-
-var ver = storage.get(myUrl.nsvertion)
-
+var ver = files.read(file)
 if (newVer == ver) {
     log("freestar 相同")
 } else {
@@ -28,9 +25,7 @@ if (newVer == ver) {
             files.write(path, element.content)
 
         });
-
-        storage.put(myUrl.nsvertion, newVer)
-
+        files.write(file, newVer);
     }
 
 }

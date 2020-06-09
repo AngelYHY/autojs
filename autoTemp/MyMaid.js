@@ -284,8 +284,7 @@ function MyMaid(packageName) {
 
     this.clear = function clear() {
         recents()
-        sleep(1000);
-        var cav = id("com.android.systemui:id/clearAnimView").findOne(5000);
+        var cav = id("clearAnimView").findOne(5000);
         this.clickCenter(cav);
         sleep(1000);
     }

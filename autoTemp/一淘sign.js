@@ -32,10 +32,6 @@ function sign() {
     waitForAndClickAction(id("com.taobao.etao:id/is_status_loading_image_view"), 10e3, 80)
 
     sleep(2000)
-    if(textContains("已经签过到").findOne(2000)){
-        killThisApp(name, { debug_info_flag: "forcible", });
-        return;
-    }
     var b = text("邀请赚集分宝").findOne(2000);
     if (!b) {
         waitForAndClickAction(text("点我签到领钱"), 10e3, 80)

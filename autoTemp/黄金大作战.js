@@ -40,7 +40,7 @@ function sign() {
     while ((b = textStartsWith("+").findOne("2000")) != null) {
         maid.clickCenter(b);
         sleep(4000)
-        waitForAndClickAction(text("立即领取"), 20e3, 80)
+        waitForAndClickAction(text("立即领取"), 10e3, 80)
         sleep(1000)
         back();
         sleep(2000)

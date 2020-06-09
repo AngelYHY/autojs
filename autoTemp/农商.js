@@ -33,16 +33,15 @@ eng.forEach(element => {
             // }
             // var info = id("com.softbank.flybank.rest.xy.zyczyh:id/toolbar_title").findOne(2000);
             // if (info) {
-
+                
             // }
         }
     }
 
 });
-
 ns();
 
-function go() {
+function go(){
 
 }
 
@@ -73,10 +72,6 @@ function ns() {
     log(b)
     maid.clickCenter(b);
     waitForAndClickAction(text("查询"), 10e3, 80)
-    if (textContains("已失效").findOne(2000)) {
-        killThisApp(name, { debug_info_flag: "forcible", })
-        closeHeartAndExit()
-    }
     let bs = textStartsWith("聚合支付").find();
     let arr = []
     bs.forEach(element => {

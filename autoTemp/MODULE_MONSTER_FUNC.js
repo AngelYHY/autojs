@@ -70,7 +70,7 @@ module.exports = {
  * @return {{app_name: string, package_name: string}}
  */
 function parseAppName(name, params) {
-    if (!name) return { app_name: "", package_name: "" };
+    if (!name) return {app_name: "", package_name: ""};
 
     global["_$_app_name_cache"] = global["_$_app_name_cache"] || {};
     global["_$_app_pkg_name_cache"] = global["_$_app_pkg_name_cache"] || {};
@@ -627,40 +627,6 @@ function launchThisApp(trigger, params) {
     }
 }
 
-function close(packageName) {
-    var name = getPackageName(packageName);
-    if (!name) {
-        if (getAppName(packageName)) {
-            name = packageName;
-        } else {
-            return false;
-        }
-    }
-    app.openAppSetting(name);
-    text(app.getAppName(name)).waitFor();
-    let is_sure = textMatches(/(.*强制.*|.*停止.*|.*结束.*|.*运行.*)/).findOne(2000);
-
-    if (is_sure.enabled()) {
-        is_sure.click()
-        let btn = textMatches(/(.*确.*|.*定.*)/).findOne(2000)
-        if (btn) {
-            btn.click();
-        } else {
-            log(app.getAppName(name) + "应用不能被正常关闭或不在后台运行");
-            back();
-            return false;
-        }
-        log(app.getAppName(name) + "应用已被关闭");
-        sleep(1000);
-        back();
-        return true;
-    } else {
-        log(app.getAppName(name) + "应用不能被正常关闭或不在后台运行");
-        back();
-        return false;
-    }
-}
-
 /**
  * Close or minimize a certain app
  * @param name=currentPackage() {string}
@@ -726,9 +692,7 @@ function killThisApp(name, params) {
 
     if (!_shell_result) {
         if (_keycode_back_acceptable) {
-            if (!close(_package_name)) {
-                return _tryMinimizeApp();
-            }
+            return _tryMinimizeApp();
         } else {
             _debugInfo("参数不接受模拟返回方法");
             _messageAction('关闭"' + _app_name + '"失败', 4, 1);
@@ -756,11 +720,10 @@ function killThisApp(name, params) {
             textMatches(/关闭|返回/),
         ];
 
-        let _max_try_times_minimize = 2;
+        let _max_try_times_minimize = 20;
         let _max_try_times_minimize_backup = _max_try_times_minimize;
 
         while (_max_try_times_minimize--) {
-            log(_max_try_times_minimize)
             let _kw_clicked_flag = false;
             for (let i = 0, len = _kw_avail_btns.length; i < len; i += 1) {
                 let _kw_avail_btn = _kw_avail_btns[i];
@@ -779,7 +742,7 @@ function killThisApp(name, params) {
         if (_max_try_times_minimize < 0) {
             _debugInfo("最小化应用尝试已达: " + _max_try_times_minimize_backup + "次");
             _debugInfo("重新仅模拟返回键尝试最小化");
-            _max_try_times_minimize = 2;
+            _max_try_times_minimize = 8;
             while (_max_try_times_minimize--) {
                 ~back() && back();
                 _keycode_back_twice && ~sleep(200) && back();
@@ -1054,7 +1017,7 @@ function restartThisEngine(params) {
 function runJsFile(file_name, e_args) {
     let _path = files.path(file_name.match(/\.js$/) ? file_name : (file_name + ".js"));
     if (e_args) {
-        return engines.execScriptFile(_path, { arguments: e_args });
+        return engines.execScriptFile(_path, {arguments: e_args});
     }
     return app.startActivity({
         action: "VIEW",
@@ -1115,7 +1078,7 @@ function messageAction(msg, msg_level, if_toast, if_arrow, if_split_line, params
     global["$$flag"] = global["$$flag"] || {};
     let $$flag = global["$$flag"];
 
-    if ($$flag.no_msg_act_flag) return !(msg_level in { 3: 1, 4: 1 });
+    if ($$flag.no_msg_act_flag) return !(msg_level in {3: 1, 4: 1});
 
     let _msg = msg || "";
     if (msg_level && msg_level.toString().match(/^t(itle)?$/)) {
@@ -1227,7 +1190,7 @@ function messageAction(msg, msg_level, if_toast, if_arrow, if_split_line, params
 
     if (_exit_flag) exit();
 
-    return !(_msg_lv in { 3: 1, 4: 1 });
+    return !(_msg_lv in {3: 1, 4: 1});
 
     // raw function(s) //
 
@@ -1540,7 +1503,7 @@ function clickAction(f, strategy, params) {
     }
 
     function _checkPadding(arr) {
-        if (!arr) return { x: 0, y: 0 };
+        if (!arr) return {x: 0, y: 0};
 
         let _coords = [];
         if (typeof arr === "number") _coords = [0, arr];
@@ -1940,10 +1903,10 @@ function swipeAndShow(f, params) {
         if (_b < _t) [_b, _t] = [_t, _b];
         let [_h, _w] = [_b - _t, _r - _l];
         let [_cl, _ct, _cr, _cb] = [
-            { x: _l, y: _t + _h / 2 },
-            { x: _l + _w / 2, y: _t },
-            { x: _r, y: _t + _h / 2 },
-            { x: _l + _w / 2, y: _b },
+            {x: _l, y: _t + _h / 2},
+            {x: _l + _w / 2, y: _t},
+            {x: _r, y: _t + _h / 2},
+            {x: _l + _w / 2, y: _b},
         ];
         return {
             l: _l, t: _t, r: _r, b: _b,
@@ -1976,7 +1939,7 @@ function swipeAndShow(f, params) {
         // tool function(s) //
 
         function _swipe() {
-            let { cl, cr, ct, cb } = _swipe_area;
+            let {cl, cr, ct, cb} = _swipe_area;
             let [_cl, _cr, _ct, _cb] = [cl, cr, ct, cb];
             if (_swipe_direction === "down") {
                 return swipe(_ct.x, _ct.y, _cb.x, _cb.y, _swipe_time);
@@ -4527,7 +4490,7 @@ function __dismissIDEWarnings__() {
     // love me, but do not invoke me
 
     if (typeof $$sel === "undefined") $$sel = {};
-    let { Integer } = java.lang; // TODO java.__proto__
+    let {Integer} = java.lang; // TODO java.__proto__
 
     Object.assign(dialogs, {
         setItems: arr => $$und,
@@ -4648,7 +4611,7 @@ function __dismissIDEWarnings__() {
         findColorInRegion: (img, color, x, y, w, h, thrd) => $$jvo.Point,
         findColorEquals: (img, color, x, y, w, h) => $$jvo.Point,
         detectsColor: (img, color, x, y, thrd, algorithm) => Boolean(),
-        matchTemplate: (img, tpl, opt) => ({/* "MatchingResult" */ }),
+        matchTemplate: (img, tpl, opt) => ({/* "MatchingResult" */}),
         blur: (img, size, point, type) => $$jvo.ImageWrapper,
         medianBlur: (img, size) => $$jvo.ImageWrapper,
         gaussianBlur: (img, size, sigma_x, sigma_y, type) => $$jvo.ImageWrapper,

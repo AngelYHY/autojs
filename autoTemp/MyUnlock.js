@@ -4,7 +4,7 @@ function MyUnlock() {
         if (device.isScreenOn()) {
             return;
         }
-        log("需要亮屏")
+
         //点亮屏幕
         device.wakeUp();
         sleep(700);
