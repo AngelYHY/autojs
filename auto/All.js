@@ -10,7 +10,7 @@ var MyUrl = require("./MyUrl.js");
 var myUrl = new MyUrl();
 var file = myUrl.file;
 files.createWithDirs(file)
-files.write(file,"");
+files.write(file, "");
 
 let {
     ysf
@@ -28,9 +28,17 @@ let {
     yitao
 } = require("./一淘sign");
 
+let {
+    kb
+} = require("./快保");
+
 ysf();
 soul();
 yitao();
+
+kb();
+
 fjdzz();
+
 
 log("还会执行吗？")

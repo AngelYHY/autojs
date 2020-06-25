@@ -1,7 +1,132 @@
-
-
+require("./EXT_TIMERS").load();
+require("./Ant_Forest/Modules/EXT_DIALOGS").load();
+require("./Ant_Forest/Modules/EXT_THREADS").load();
 
 function MyMaid(packageName) {
+
+    this.showDialog = function showDialog() {
+
+        let _sec = 5;
+        let _diag = _promptSetter();
+        let _action = _actionSetter();
+        let _thd_et = threads.starts(_thdEt);
+
+        _diag.show();
+        _action.wait();
+
+        // tool function(s) //
+
+        function _promptSetter() {
+            let _btnMsg = (btn_name) => {
+                let _btn = _diag_prompt.getActionButton(btn_name);
+                let _regexp = / *\[ *\d+ *] */;
+                log('用户点击"' + btn_name + _btn.replace(_regexp, "") + '"按钮')
+                debugInfo('用户点击"' + _btn.replace(_regexp, "") + '"按钮');
+            };
+            let _diag_prompt = dialogs.builds([
+                "运行提示", "\n即将在 " + _sec + " 秒内运行任务\n",
+                ["结束", "warn_btn_color"],
+                ["推迟5分钟运行", "caution_btn_color"],
+                ["立即开始  [ " + _sec + " ]", "attraction_btn_color"],
+                1,
+            ]).on("positive", (d) => {
+                _btnMsg("positive");
+                _action.posBtn(d);
+            }).on("negative", (d) => {
+                _btnMsg("negative");
+                _action.negBtn(d);
+            }).on("neutral", (d) => {
+                _btnMsg("neutral");
+                _action.neuBtn(d);
+            });
+
+            return dialogs.disableBack(_diag_prompt, () => _action.pause(100));
+        }
+
+        function _actionSetter() {
+            return {
+                posBtn(d) {
+                    this._sgn_move_on = true;
+                    this.pause(100);
+                    d.dismiss();
+                },
+                negBtn(d) {
+                    this._sgn_move_on = true;
+                    this.pause(100);
+                    d.dismiss();
+
+                    let _ts = Date.now() + 300e3;
+                    let _par = { path: engines.myEngine().getSource().toString(), date: _ts };
+                    timers.addDisposableTask(_par);
+
+                    exit();
+
+
+                    // tool function(s) //
+
+                    function getBuildsParam() {
+                        let _task_len = timers.queryTimedTasks({
+                            path: $$app.cwp,
+                        }).length;
+                        let _task_str = $$app.task_name + "定时任务";
+                        let _title = ["注意", "title_caution_color"];
+                        let _pref = "当前未设置任何" + _task_str + "\n\n";
+                        let _main = "确认要放弃本次任务吗";
+                        let _cnt = [_pref + _main, "content_warn_color"];
+                        let _pos_btn = ["确认放弃任务", "caution_btn_color"];
+                        if (_task_len) {
+                            _title = ["提示", "title_default_color"];
+                            _cnt = [_main, "content_default_color"];
+                        }
+                        return [_title, _cnt, 0, "返回", _pos_btn, 1];
+                    }
+                },
+                neuBtn(d) {
+                    this._sgn_move_on = true;
+                    this.pause(100);
+                    d.dismiss();
+                    exit();
+                },
+                pause(interval) {
+                    _thd_et.interrupt();
+                    setTimeout(function () {
+                        let _cont = dialogs.getContentText(_diag);
+                        let _cont_txt = _cont.replace(
+                            /.*(".+".*任务).*/, "请选择$1运行选项"
+                        );
+                        _diag.setContent(_cont_txt);
+                        let _pos = _diag.getActionButton("positive");
+                        let _pos_txt = _pos.replace(/ *\[ *\d+ *]$/, "");
+                        _diag.setActionButton("positive", _pos_txt);
+                    }, interval || 800);
+                },
+                wait() {
+                    if (!waitForAction(() => this._sgn_move_on, 5 * 60e3)) {
+                        _diag.dismiss();
+                        _thd_et = _diag = null;
+                        messageAction("强制结束脚本", 4, 0, 0, -1);
+                        messageAction("等待运行提示对话框操作超时", 9, 1, 0, 1);
+                    }
+                },
+            };
+        }
+
+        // thread function(s) //
+
+        function _thdEt() {
+            while (--_sec) {
+                let _cont = dialogs.getContentText(_diag);
+                _diag.setContent(_cont.replace(/\d+/, _sec));
+                let _pos = _diag.getActionButton("positive");
+                let _pos_str = _pos.replace(/ *\[ *\d+ *]$/, "");
+                let _pos_txt = _pos_str + "  [ " + _sec + " ]";
+                _diag.setActionButton("positive", _pos_txt);
+                sleep(1e3);
+            }
+            debugInfo(["运行提示计时器超时", "任务自动继续"]);
+            _action.posBtn(_diag);
+        }
+    }
 
     this.packageName = packageName;
     if (packageName && !getAppName(packageName)) {

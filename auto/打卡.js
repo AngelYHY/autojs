@@ -16,51 +16,52 @@ unlock.unlock();
 let name = "多多爱运动";
 launchThisApp(name);
 waitForAction(id("mine"));
+
 let btns = textEndsWith("领现金").find();
 
 btns.forEach(element => {
-    maid.clickCenter(element);
-    let bs = textStartsWith("分享到").findOne(2000)
-    if(bs){
-        maid.clickCenter(bs);
-        sleep(2000);
-        back();
-        if (bs.text().indexOf("微信群") > 0) {
-            waitForAndClickAction(id("cancel"), 5e3, 80)
-        } else {
-            if (waitForAndClickAction(id("com.tencent.mm:id/dom"), 5e3, 80)) {
-                waitForAndClickAction(id("cancel"), 5e3, 80)
-            }
-    
-        }
-        sleep(2000);
-        back();
-        sleep(2000);
-    }
-
+    sign(element)
 });
 
+killThisApp(name)
 
 
-// killThisApp(name)
+name = "睡宝";
 
+launchThisApp(name);
+waitForAction(id("mine"));
+btns = textEndsWith("领现金").find();
+btns.forEach(element => {
+    sign(element)
+});
 
-// name = "睡宝";
-
-// launchThisApp(name);
-// waitForAction(id("mine"));
-// btns = textEndsWith("领现金").find();
-// btns.forEach(element => {
-//     maid.clickCenter(element);
-//     if (waitForAndClickAction(textStartsWith("分享到"), 5e3, 80)) {
-//         if (waitForAndClickAction(id("com.tencent.mm:id/ch"), 5e3, 80)) {
-//             if (waitForAndClickAction(id("com.tencent.mm:id/dom"), 5e3, 80)) {
-//                 waitForAndClickAction(id("cancel"), 5e3, 80)
-//             }
-//         }
-//     }
-// });
-
-// killThisApp(name)
+killThisApp(name)
 
 maid.clear();
+
+function sign(element) {
+    maid.clickCenter(element);
+    waitForAndClickAction(id("btnClose"), 4e3, 80)
+    
+    // let bs = textStartsWith("分享到").findOne(2000)
+    // if (bs) {
+    //     waitForAndClickAction(textStartsWith("分享到"), 5e3, 80)
+    //     // maid.clickCenter(bs);
+    //     sleep(4000);
+    //     back()
+    //     if (bs.text().indexOf("微信群") > 0) {
+    //         log("这里" + bs)
+    //         waitForAndClickAction(id("cancel"), 5e3, 80)
+    //     } else {
+    //         log("哪里")
+    //         if (waitForAndClickAction(id("com.tencent.mm:id/dom"), 5e3, 80)) {
+    //             waitForAndClickAction(id("cancel"), 5e3, 80)
+    //         }
+
+    //     }
+    //     // sleep(4000);
+    //     waitForAndClickAction(id("btnClose"), 8e3, 80)
+    //     waitForAndClickAction(id("btnClose"), 4e3, 80)
+    //     back()
+    // }
+}

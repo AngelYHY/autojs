@@ -1,10 +1,10 @@
-
 var Maid = require("./MyMaid.js");
 var maid = new Maid();
 
 var MyUrl = require("./MyUrl.js");
 var myUrl = new MyUrl();
 var file = myUrl.file;
+var name = "快保";
 
 let {
     clickAction, swipeAndShow, setIntervalBySetTimeout, keycode,
@@ -14,48 +14,24 @@ let {
     showSplitLine, classof, timeRecorder, surroundWith,
 } = require("./MODULE_MONSTER_FUNC");
 
-var name = "Soul";
 var count = 0;
 
+// sign()
 
 function sign() {
     home();
     launchThisApp(name)
 
-    // var t = text("自己").findOne(10000);
-
-    waitForAndClickAction(text("自己"), 10e3, 80)
-
-    // if (!maid.clickCenter(t)) {
-    //     reset()
-    //     exit();
-    // }
-
-    sleep(1000);
-
-    // var t = id("tv_soul_coin_center").findOne(10000);
-
-    // if (!maid.clickCenter(t)) {
-    //     reset()
-    //     exit();
-    // }
-
-    if (!waitForAndClickAction(id("tv_soul_coin_center"), 10e3, 80)) {
-        reset()
-        return;
-    }
-
-    let b = className("android.view.View").textStartsWith("每日签到").findOne();
-   
-    sleep(5000);
-    maid.clickPointRight(b)
-    sleep(1000);
-
+    waitForAndClickAction(textContains("跳过"), 15e3, 80)
+    waitForAndClickAction(id("com.DaTong.InsuranceForAndroid:id/img_close"), 8e3, 80)
+    waitForAndClickAction(id("com.DaTong.InsuranceForAndroid:id/imagebutton_signin"), 5e3, 80)
+    sleep(4000)
+    text("签到成功").findOne(10000);
     killThisApp(name, { debug_info_flag: "forcible", })
+
 }
 
 function reset() {
-
     killThisApp(name)
     if (count > 4) {
         files.createWithDirs(file)
@@ -66,10 +42,10 @@ function reset() {
     sign()
 }
 
-function soul() {
+function kb() {
     sign();
 }
 
 module.exports = {
-    soul: soul
+    kb: kb
 }

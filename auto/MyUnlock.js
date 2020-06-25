@@ -1,6 +1,25 @@
 
+require("./EXT_TIMERS").load();
+
 function MyUnlock() {
     this.unlock = function () {
+        let eng = engines.all();
+
+        if (eng.length > 1) {
+            let eng = engines.myEngine()
+            let engStr = eng.getSource().toString();
+
+            let _ts = Date.now() + 300e3;
+            let _par = { path: engines.myEngine().getSource().toString(), date: _ts };
+            timers.addDisposableTask(_par);
+
+            // engines.execScriptFile(engStr, {
+            //     delay: 300000,
+            //     path: "/storage/emulated/0/脚本",
+            // })
+
+            exit();
+        }
         if (device.isScreenOn()) {
             return;
         }
@@ -8,7 +27,7 @@ function MyUnlock() {
         //点亮屏幕
         device.wakeUp();
         sleep(700);
- 
+
         //miui锁屏滑动不能唤出密码输入 通过下拉通知栏点击时间进入密码解锁
         swipe(500, 30, 500, 1000, 300);
         sleep(400);

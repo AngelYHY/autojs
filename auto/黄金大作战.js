@@ -41,7 +41,7 @@ function sign() {
         maid.clickCenter(b);
         sleep(4000)
         waitForAndClickAction(text("立即领取"), 20e3, 80)
-        sleep(1000)
+        waitForAndClickAction(text("拒绝"), 3e3, 80)
         back();
         sleep(2000)
     }
@@ -64,7 +64,7 @@ function sign() {
         maid.clickCenter(b);
         sleep(2000)
     }
-    sleep(2000);
+    sleep(5000);
     log(waitForAndClickAction(textStartsWith("家庭积分"), 10e3, 80))
     sleep(2000);
     b = null;
