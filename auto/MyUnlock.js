@@ -6,24 +6,20 @@ function MyUnlock() {
         let eng = engines.all();
 
         if (eng.length > 1) {
-            let eng = engines.myEngine()
+            log("个数：000")
+            let eng = engines.myEngine();
             let engStr = eng.getSource().toString();
-
+            // 五分钟 300s
             let _ts = Date.now() + 300e3;
             let _par = { path: engines.myEngine().getSource().toString(), date: _ts };
             timers.addDisposableTask(_par);
-
-            // engines.execScriptFile(engStr, {
-            //     delay: 300000,
-            //     path: "/storage/emulated/0/脚本",
-            // })
 
             exit();
         }
         if (device.isScreenOn()) {
             return;
         }
-        log("需要亮屏")
+        log("需要亮屏");
         //点亮屏幕
         device.wakeUp();
         sleep(700);
@@ -42,7 +38,7 @@ function MyUnlock() {
         desc(2).findOne().click();
         desc(9).findOne().click();
 
-        sleep(2000)
+        sleep(2000);
         //等待解锁完成，返回并退出
         home();
     }

@@ -17,38 +17,25 @@ let {
 var name = "Soul";
 var count = 0;
 
+// sign()
 
 function sign() {
     home();
     launchThisApp(name)
 
-    // var t = text("自己").findOne(10000);
-
     waitForAndClickAction(text("自己"), 10e3, 80)
 
-    // if (!maid.clickCenter(t)) {
-    //     reset()
-    //     exit();
-    // }
-
     sleep(1000);
-
-    // var t = id("tv_soul_coin_center").findOne(10000);
-
-    // if (!maid.clickCenter(t)) {
-    //     reset()
-    //     exit();
-    // }
 
     if (!waitForAndClickAction(id("tv_soul_coin_center"), 10e3, 80)) {
         reset()
         return;
     }
 
-    let b = className("android.view.View").textStartsWith("每日签到").findOne();
-   
-    sleep(5000);
-    maid.clickPointRight(b)
+    sleep(5000)
+    let b = className("android.view.View").text("每日签到").findOne(10000).parent();
+    maid.clickCenter(b.child(1))
+
     sleep(1000);
 
     killThisApp(name, { debug_info_flag: "forcible", })

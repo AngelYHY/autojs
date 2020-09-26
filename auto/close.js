@@ -1,4 +1,5 @@
-"auto";
+auto.waitFor();
+
 
 var Maid = require("./MyMaid.js");
 var maid = new Maid();
@@ -11,6 +12,127 @@ let {
     showSplitLine, classof, timeRecorder, surroundWith,
 } = require("./MODULE_MONSTER_FUNC");
 
+
+let l = ["11", 222, 233];
+
+
+waitForAndClickAction(id("tv_icon3"), 4e3, 80);
+
+// l.forEach(function (value, index) {
+//     if (value == 11) {
+//         continue;
+//     }
+//     log(value);
+// })
+
+
+// for (let index = 0; index < l.length; index++) {
+//     let value = l[index];
+//     if (value == 11) {
+//         continue;
+//     }
+//     log(value);
+// }
+// for (let index = 0; index < array.length; index++) {
+//     let element = array[index];
+    
+// }
+
+// for (const key in object) {
+//     if (object.hasOwnProperty(key)) {
+//         const element = object[key];
+
+//     }
+// }
+
+// for (let value of l) {
+//     if (value == 11) {
+//         continue;
+//     }
+//     log(value);
+// }
+
+// l.map(function(value,index,l){
+//     if (value == 11) {
+//         continue;
+//     }
+//     log(value);
+// })
+
+// let buy = "";
+// let rv = id("rv_billReceiptList").findOne(4000)
+
+// rv.children().forEach(element => {
+//     let txt = element.findOne(id("tv_group1")).text();
+//     log(txt);
+//     buy += txt;
+// });
+// log(buy);
+// var name = "TG";
+// killThisApp(name)
+// launchApp(name);
+
+// let trade=text("市场列表").findOne(2000);
+// log(trade);
+
+// maid.clickCenter(trade);
+
+// setScreenMetrics(1080, 2340);
+
+// let width = device.width;
+// let height = device.height;
+
+// log(width + "---" + height)
+// log((width / 5 + 100) + "--" + (height - 100));
+// click(width / 5 + 100, height - 100);
+
+
+// var obj = new Date();
+// var hour = obj.getHours();
+// // alert(hour);
+// log(hour)
+
+// let int = 15;
+// log(Math.abs(hour - int))
+// // log(hour - int)
+
+
+// log(Math.abs(hour - int))
+
+
+// function getAbs(now, other) {
+//     if (now == 23 && other == 0) {
+//         return 1;
+//     }
+// }
+
+// let width = device.width;
+// let height = device.height;
+// var ra = new RootAutomator();
+// ra.tap(50, height - 50, 1);
+
+// ra.swipe(width/2,width/2,height/2,height/2-200,3000)
+// ra.swipe(width/2,height/2,width/2,height/2-200,300)
+// click(50,height-50)
+
+
+// let rv=id("rv_predict_list").find();
+// log(rv.size())
+// let r=rv.get(1);
+// let ll=id("linearLayout19").find()
+// log(ll.size());
+// let r = className("androidx.recyclerview.widget.RecyclerView").findOne(2000)
+// let zeroZero = r.child(0).findOne(id("tv_profit")).text().replace(/%/g, "");
+
+// let t=text("0 - 0").findOne(2000).parent
+// id("tv_profit").find(2000)
+// log("半场0.0 水位" + zeroZero)
+
+// let str="09-07 01:00";
+// str=str.slice(-5,-3)
+// log(parseInt(str))
+
+
 // var btn=id("com.dotcore.yypay:id/qrcode_img").findOne(2000)
 // var btn=id("com.taobao.etao:id/home_views_circle_nav_item_image").findOne(2000)
 // .find(className("android.widget.ImageView"))
@@ -18,7 +140,7 @@ let {
 // // .findOne(2000)
 // log(btn)
 
-shell("screencap /sdcard/照片/screen.png");
+// shell("screencap /sdcard/照片/screen.png");
 
 // requestScreenCapture();
 // captureScreen("/sdcard/照片/" + new Date().getTime() + ".png");

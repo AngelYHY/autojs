@@ -1,14 +1,29 @@
 "auto";
 
-var s=new Date().getTime()
-sleep(3000);
-var t=new Date().getTime()
-log((t-s))
+let {
+    clickAction, swipeAndShow, setIntervalBySetTimeout, keycode,
+    getSelector, equalObjects, waitForAndClickAction, runJsFile,
+    messageAction, debugInfo, killThisApp, clickActionsPipeline,
+    waitForAction, baiduOcr, launchThisApp, observeToastMessage,
+    showSplitLine, classof, timeRecorder, surroundWith,
+} = require("./MODULE_MONSTER_FUNC");
 
-var MyUrl = require("./MyUrl.js");
-var myUrl = new MyUrl();
-var storage = storages.create(myUrl.msgKey);
-storage.remove(myUrl.msgContentKey)
+
+
+// let rv = id("tg333.net:id/rv_money_sub").findOne(10000);
+// log(rv)
+// swipe(180, 1370, 1000, 1470, 1000);
+// gesture(800, [180, 1370], [500, 500], [500, 1000])
+
+// var s=new Date().getTime()
+// sleep(3000);
+// var t=new Date().getTime()
+// log((t-s))
+
+// var MyUrl = require("./MyUrl.js");
+// var myUrl = new MyUrl();
+// var storage = storages.create(myUrl.msgKey);
+// storage.remove(myUrl.msgContentKey)
 
 // swipe(device.width / 2, device.height / 4,
 //     device.width / 2, device.height, 300);

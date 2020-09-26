@@ -24,7 +24,7 @@ function sign() {
 
     waitForAndClickAction(textContains("跳过"), 15e3, 80)
     waitForAndClickAction(id("com.DaTong.InsuranceForAndroid:id/img_close"), 8e3, 80)
-    waitForAndClickAction(id("com.DaTong.InsuranceForAndroid:id/imagebutton_signin"), 5e3, 80)
+    waitForAndClickAction(id("com.DaTong.InsuranceForAndroid:id/imagebutton_signin"), 8e3, 80)
     sleep(4000)
     text("签到成功").findOne(10000);
     killThisApp(name, { debug_info_flag: "forcible", })

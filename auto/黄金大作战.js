@@ -25,12 +25,9 @@ function sign() {
         condition_launch: () => id("com.alipay.android.widget.fortunehome:id/tab_description").findOne(2000)
     })
     sleep(2000)
-    // var bt=text("我的小程序").findOne().parent().parent()
-    // log(bt)
-    // maid.clickCenter(bt);
-    waitForAndClickAction(desc("最近使用"), 10e3, 80)
-    // var bt = text("我的小程序").findOne().parent().parent()
-    // log(bt)
+
+    // waitForAndClickAction(desc("最近使用"), 10e3, 80)
+
     waitForAndClickAction(text("我的小程序"), 10e3, 80)
     sleep(2000)
     waitForAndClickAction(text("发现"), 10e3, 80)
@@ -51,7 +48,7 @@ function sign() {
     log("1")
     waitForAndClickAction(text("黄金大作战"), 10e3, 80)
     log("2")
-    sleep(2000)
+    waitForAction(text("持有黄金票"))
 
     back();
     waitForAndClickAction(id("com.alipay.android.phone.wealth.home:id/tab_description"), 10e3, 80)
@@ -66,9 +63,15 @@ function sign() {
     }
     sleep(5000);
     log(waitForAndClickAction(textStartsWith("家庭积分"), 10e3, 80))
-    sleep(2000);
+    if (!waitForAction(text("我的家"), 5e3)) {
+        log("进来back")
+        back();
+        sleep(2000)
+        waitForAndClickAction(textStartsWith("家庭积分"), 10e3, 80)
+    }
+    sleep(5000);
     b = null;
-    while ((b = className("android.widget.Button").textStartsWith("领取").findOne("2000")) != null) {
+    while ((b = textStartsWith("+").findOne("2000")) != null) {
         maid.clickCenter(b);
         sleep(2000)
     }

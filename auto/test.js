@@ -11,9 +11,94 @@ require("./EXT_TIMERS").load();
 require("./Ant_Forest/Modules/EXT_DIALOGS").load();
 require("./Ant_Forest/Modules/EXT_THREADS").load();
 
+
 var Maid = require("./MyMaid.js");
 var maid = new Maid();
 
+// let swid = 540;
+// let shei = 1800;
+// let ewid = 540;
+// let ehei = 1300;
+// while (1) {
+//     swipe(swid, shei, ewid, ehei, 300);
+// }
+
+files.createWithDirs("/sdcard/瞬间/瞬间.txt");
+files.write("/sdcard/瞬间/瞬间.txt","")
+let swid = 540;
+let shei = 1800;
+let ewid = 540;
+let ehei = 1300;
+// log(swid + "--" + shei + "--" + ewid + "--" + ehei)
+
+var str = null;
+var arr = [];
+var count=0;
+while (1) {
+    var list = id("cn.soulapp.android:id/post_content").find();
+    // log(list.length)
+    var content = list[0].text();
+    log(content + "--" + str)
+    if (str != content) {
+        count=0;
+        str=content;
+        arr.push(str+"@@");
+        if (arr.length > 100) {
+            files.append("/sdcard/瞬间/瞬间.txt", arr);
+            arr = [];
+        }
+        
+    }else{
+        count++;
+        if(count>50){
+            log(list.length)
+            list.forEach(element => {
+                content= element.text();
+                if (str != content) {
+                    str=content;
+                    log(str)
+                    arr.push(str+"@@");
+                }
+            });
+            files.append("/sdcard/瞬间/瞬间.txt", arr);
+            log("结束了")
+            exit()
+        }
+    }
+
+    swipe(swid, shei, ewid, ehei, 300);
+}
+
+
+// let b=id("cn.soulapp.android:id/post_attachment").findOne().findOne(className("android.widget.ImageView"))
+// log(b)
+
+// var img = images.read("/sdcard/照片/截图.jpg");
+// var templ = images.read("/sdcard/照片/宝物.jpg");
+// var p = findImage(img, templ, { threshold: 0.2 });
+// if (p) {
+//     toast("找到啦:" + p);
+//     log("找到啦"+p)
+//     click(p)
+// } else {
+//     toast("没找到");
+//     log("没找到")
+// }
+
+
+// let count = 0;
+// while (count<35) {
+//     click(2070, 190)
+//     sleep(35000)
+//     back()
+//     sleep(2000)
+//     click(1220, 840)
+//     count++;
+//     sleep(1000);
+// }
+
+// click(1200,990)
+// click(1460,920)
 // let _sec = 5;
 // let _diag = _promptSetter();
 // let _action = _actionSetter();
