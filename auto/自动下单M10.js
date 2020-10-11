@@ -121,14 +121,10 @@ function start() {
     log("执行 start");
     killThisApp(name);
     launchApp(name);
-    if (waitForAction(text("请选择要使用的应用"))) {
-        click(300, 1800);
-    };
-    // waitForAndClickAction(text("确定"), 8e3, 80)
-    // waitForAndClickAction(id("close_btn"), 4e3, 80);
-    sleep(3000);
-    log("跳过 确定");
+    waitForAndClickAction(text("确定"), 8e3, 80)
     waitForAndClickAction(id("close_btn"), 4e3, 80);
+    sleep(3000);
+    log("跳过 确定")
     waitForAndClickAction(text("交易明细"), 4e3, 80);
     sleep(2000);
     let rv = id("rv_billReceiptList").findOne(4000)
@@ -217,11 +213,11 @@ function go(half) {
         let profit = r.child(element.size).findOne(id("tv_profit")).text().replace(/%/g, "");
         log(profit);
         if (profit > 3) {
-            if (element.size != 0) {
-                log(r.child(element.size) + "---free")
-                maid.clickCenter(r.child(element.size));
-                sleep(2000)
-                bet(element);
+            if(element.size!=0){
+            log(r.child(element.size) + "---free")
+            maid.clickCenter(r.child(element.size));
+            sleep(2000)
+            bet(element);
             }
         }
 

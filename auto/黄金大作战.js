@@ -23,58 +23,50 @@ function sign() {
     launchThisApp(name, {
         debug_info_flag: "forcible",
         condition_launch: () => id("com.alipay.android.widget.fortunehome:id/tab_description").findOne(2000)
-    })
-    sleep(2000)
+    });
+    sleep(2000);
 
     // waitForAndClickAction(desc("最近使用"), 10e3, 80)
 
-    waitForAndClickAction(text("我的小程序"), 10e3, 80)
-    sleep(2000)
-    waitForAndClickAction(text("发现"), 10e3, 80)
-    sleep(2000)
+    waitForAndClickAction(text("我的小程序"), 10e3, 80);
+    sleep(2000);
+    waitForAndClickAction(text("发现"), 10e3, 80);
+    sleep(2000);
 
     let b = null;
     while ((b = textStartsWith("+").findOne("2000")) != null) {
         maid.clickCenter(b);
-        sleep(4000)
-        waitForAndClickAction(text("立即领取"), 20e3, 80)
-        waitForAndClickAction(text("拒绝"), 3e3, 80)
+        sleep(4000);
+        waitForAndClickAction(text("立即领取"), 20e3, 80);
+        waitForAndClickAction(text("拒绝"), 3e3, 80);
         back();
-        sleep(2000)
+        sleep(2000);
     }
 
-    restartThisApp(name)
-    waitForAndClickAction(id("com.alipay.android.widget.fortunehome:id/tab_description"), 10e3, 80)
-    log("1")
-    waitForAndClickAction(text("黄金大作战"), 10e3, 80)
-    log("2")
-    waitForAction(text("持有黄金票"))
+    restartThisApp(name);
+    waitForAndClickAction(id("com.alipay.android.widget.fortunehome:id/tab_description"), 10e3, 80);
+    log("1");
+    waitForAndClickAction(text("黄金大作战"), 10e3, 80);
+    log("2");
+    waitForAction(text("持有黄金票"));
 
     back();
-    waitForAndClickAction(id("com.alipay.android.phone.wealth.home:id/tab_description"), 10e3, 80)
-    waitForAndClickAction(text("支付宝会员"), 10e3, 80)
-    waitForAndClickAction(text("领积分"), 10e3, 80)
-    sleep(2000)
+    waitForAndClickAction(id("com.alipay.android.phone.wealth.home:id/tab_description"), 10e3, 80);
+    waitForAndClickAction(text("支付宝会员"), 10e3, 80);
+    waitForAndClickAction(text("领积分"), 10e3, 80);
+    sleep(2000);
 
     b = null;
+    let cou = 0;
     while ((b = text("点击领取").findOne("2000")) != null) {
+        cou++;
+        if (cou > 10) {
+            break;
+        }
         maid.clickCenter(b);
-        sleep(2000)
+        sleep(2000);
     }
-    sleep(5000);
-    log(waitForAndClickAction(textStartsWith("家庭积分"), 10e3, 80))
-    if (!waitForAction(text("我的家"), 5e3)) {
-        log("进来back")
-        back();
-        sleep(2000)
-        waitForAndClickAction(textStartsWith("家庭积分"), 10e3, 80)
-    }
-    sleep(5000);
-    b = null;
-    while ((b = textStartsWith("+").findOne("2000")) != null) {
-        maid.clickCenter(b);
-        sleep(2000)
-    }
+
 
     killThisApp(name, { debug_info_flag: "forcible", });
 
@@ -85,12 +77,12 @@ function reset() {
 
     killThisApp(name)
     if (count > 4) {
-        files.createWithDirs(file)
+        files.createWithDirs(file);
         files.append(file, name + " 失败");
         return;
     }
     count++;
-    sign()
+    sign();
 }
 
 function fjdzz() {

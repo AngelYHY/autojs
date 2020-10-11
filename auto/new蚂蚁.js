@@ -20,12 +20,21 @@ launchApp(name);
 sleep(2000);
 click(300, 1000);
 
-waitForAndClickAction(text("蚂蚁森林"), 20e3, 80);
-
+waitForAndClickAction(text("蚂蚁森林"), 10e3, 80);
+sleep(5000);
+let title = text("蚂蚁森林").findOne(2000);
+if (!title) {
+    log("打开错误了");
+    let _ts = Date.now() + 120e3;
+    let _par = { path: engines.myEngine().getSource().toString(), date: _ts };
+    timers.addDisposableTask(_par);
+    exit();
+}
 // waitForAndClickAction(textStartsWith("收集能量"), 5e3, 80)
 let total = 0;
 while (total < 8) {
     collect();
+    log(total);
 }
 
 var obj = new Date();

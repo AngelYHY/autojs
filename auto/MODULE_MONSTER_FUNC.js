@@ -627,39 +627,7 @@ function launchThisApp(trigger, params) {
     }
 }
 
-function close(packageName) {
-    var name = getPackageName(packageName);
-    if (!name) {
-        if (getAppName(packageName)) {
-            name = packageName;
-        } else {
-            return false;
-        }
-    }
-    app.openAppSetting(name);
-    text(app.getAppName(name)).waitFor();
-    let is_sure = textMatches(/(.*强制.*|.*停止.*|.*结束.*|.*运行.*)/).findOne(2000);
 
-    if (is_sure.enabled()) {
-        is_sure.click()
-        let btn = textMatches(/(.*确.*|.*定.*)/).findOne(2000)
-        if (btn) {
-            btn.click();
-        } else {
-            log(app.getAppName(name) + "应用不能被正常关闭或不在后台运行");
-            back();
-            return false;
-        }
-        log(app.getAppName(name) + "应用已被关闭");
-        sleep(1000);
-        back();
-        return true;
-    } else {
-        log(app.getAppName(name) + "应用不能被正常关闭或不在后台运行");
-        back();
-        return false;
-    }
-}
 
 /**
  * Close or minimize a certain app
@@ -866,6 +834,50 @@ function killThisApp(name, params) {
             package_name: _package_name,
         };
     }
+
+    function close(packageName) {
+        log("close...");
+        var name = getPackageName(packageName);
+        if (!name) {
+            if (getAppName(packageName)) {
+                name = packageName;
+            } else {
+                return false;
+            }
+        }
+        app.openAppSetting(name);
+        text(app.getAppName(name)).waitFor();
+        let is_sure = textMatches(/(.*强制.*|.*停止.*|.*结束.*|.*运行.*)/).findOne(2000);
+        log("停止" + is_sure);
+        // sleep(20000);
+        // if (!is_sure) {
+        //     log("强制停止。。。。");
+        //     is_sure = text("强行停止").findOne(2000);
+        // }
+        // if (is_sure.enabled()) {
+        clickActionRaw(is_sure);
+        // is_sure.click();
+        sleep(1000);
+        let btn = textMatches(/(.*确.*|.*定.*)/).findOne(2000);
+        clickActionRaw(btn);
+        // if (btn) {
+        //     btn.click();
+        // } else {
+        //     log(app.getAppName(name) + "应用不能被正常关闭或不在后台运行");
+        //     back();
+        //     return false;
+        // }
+        log(app.getAppName(name) + "应用已被关闭");
+        sleep(1000);
+        back();
+        return true;
+        // } else {
+        //     log(app.getAppName(name) + "应用不能被正常关闭或不在后台运行");
+        //     back();
+        //     return false;
+        // }
+    }
+
 }
 
 /**

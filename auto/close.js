@@ -4,6 +4,12 @@ auto.waitFor();
 var Maid = require("./MyMaid.js");
 var maid = new Maid();
 
+let swid = 540;
+let shei = 1800;
+let ewid = 540;
+let ehei = 1600;
+
+
 let {
     clickAction, swipeAndShow, setIntervalBySetTimeout, keycode,
     getSelector, equalObjects, waitForAndClickAction, runJsFile,
@@ -13,10 +19,31 @@ let {
 } = require("./MODULE_MONSTER_FUNC");
 
 
-let l = ["11", 222, 233];
+// log(text("点击领取").findOne("2000"));
+// swipe(swid, shei, ewid, ehei, 300);
+// sleep(1000);
+// let rvs = id("rv_predict_list").find();
+// r = rvs.get(0);
+// log(r.childCount());
+// r.child(15).click();
+
+// let str="23,43.32".replace(/,/g, "");
+// log(parseInt(str));
+
+// let b = id("sv_layout").findOne(2000);
+// let ah = b.findOne(className("TextView"));
+// log(ah);
+// log(ah.text());
+// log(ah.drawingOrder());
+
+// let b = id("tv_option").findOne(2000);
+// let arr = b.text().replace(/ /g, "").split("-");
+// log((parseInt(arr[0]) + parseInt(arr[1])));
+
+// let l = ["11", 222, 233];
 
 
-waitForAndClickAction(id("tv_icon3"), 4e3, 80);
+// waitForAndClickAction(id("tv_icon3"), 4e3, 80);
 
 // l.forEach(function (value, index) {
 //     if (value == 11) {
@@ -35,7 +62,7 @@ waitForAndClickAction(id("tv_icon3"), 4e3, 80);
 // }
 // for (let index = 0; index < array.length; index++) {
 //     let element = array[index];
-    
+
 // }
 
 // for (const key in object) {
