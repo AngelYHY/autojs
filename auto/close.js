@@ -7,7 +7,7 @@ var maid = new Maid();
 let swid = 540;
 let shei = 1800;
 let ewid = 540;
-let ehei = 1600;
+let ehei = 1550;
 
 
 let {
@@ -15,9 +15,50 @@ let {
     getSelector, equalObjects, waitForAndClickAction, runJsFile,
     messageAction, debugInfo, killThisApp, clickActionsPipeline,
     waitForAction, baiduOcr, launchThisApp, observeToastMessage,
-    showSplitLine, classof, timeRecorder, surroundWith,
+    showSplitLine, classof, timeRecorder, surroundWith, myCaptureScreen,
 } = require("./MODULE_MONSTER_FUNC");
 
+// let path = "/sdcard/capture/123.png";
+// let result=files.createWithDirs(path);
+// log(result);
+// log(path);
+
+
+//请求横屏截图
+// requestScreenCapture(false);
+// //截图
+// var img = captureScreen();
+
+myCaptureScreen();
+
+// let path="/sdcard/capture";
+// log(path);
+// files.createWithDirs(path);
+// captureScreen(path)
+
+// var scoreReg = /3 - 0|0 - 3|3 - 3/g;
+
+// let score =id("tg333.net:id/tv_score").findOne(2000);
+// if(score.text().match(scoreReg) == null){
+//     log("没有呀");
+// }else{
+//     log("23");
+// }
+
+// maid.reqCapture();
+
+// swipe(swid, shei, ewid, ehei, 300);
+// sleep(1000);
+// let rvs = id("rv_predict_list").find();
+// r = rvs.get(0);
+// log(r.childCount());
+// let b=r.child(15)
+// log(b.findOne(id("tv_profit")).text());
+
+// let str="瑞士超";
+// var reg = /超|甲/g;
+// let arr=str.match(reg);
+// log(arr==null);
 
 // log(text("点击领取").findOne("2000"));
 // swipe(swid, shei, ewid, ehei, 300);

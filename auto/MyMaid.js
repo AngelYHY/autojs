@@ -4,9 +4,6 @@ require("./Ant_Forest/Modules/EXT_THREADS").load();
 
 function MyMaid(packageName) {
 
-
-    var ra = new RootAutomator();
-
     this.showDialog = function showDialog() {
 
         let _sec = 5;
@@ -169,7 +166,7 @@ function MyMaid(packageName) {
             return false;
         let rect = widget.bounds();
         log(widget + "++clickCenter")
-        return this.click(rect.centerX(), rect.centerY());
+        return click(rect.centerX(), rect.centerY());
     };
 
     this.clickSelectorCenter = function (selector) {

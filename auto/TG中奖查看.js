@@ -15,15 +15,15 @@ var maid = new Maid();
 let swid = 540;
 let shei = 1800;
 let ewid = 540;
-let ehei = 1300;
+let ehei = 1600;
 let team = "";
 let count = 0;
 
 let flag = true;
 
 let arr = [];
-// killThisApp(name);
-// launchApp(name);
+killThisApp(name);
+launchApp(name);
 
 // waitForAndClickAction(text("取消"), 20e3, 80)
 // id("tg333.net:id/PW_textView").findOne(2000).setText("1314ANtong")
@@ -31,12 +31,12 @@ let arr = [];
 // swipe(180, 1370, 1000, 1470, 1000);
 // sleep(5000)
 
-// waitForAndClickAction(text("确定"), 10e3, 80)
-// sleep(1000)
-// waitForAndClickAction(id("tv_icon3"), 4e3, 80);
-// log("点击了历史")
-// waitForAndClickAction(text("上周"), 20e3, 80)
-// sleep(4000)
+waitForAndClickAction(text("确定"), 10e3, 80)
+sleep(1000)
+waitForAndClickAction(id("tv_icon3"), 4e3, 80);
+log("点击了历史")
+waitForAndClickAction(text("上周"), 20e3, 80)
+sleep(4000)
 let allRv = id("tg333.net:id/rv_money_sub").find();
 let rv = allRv.get(1);
 let size = rv.childCount() - 2;

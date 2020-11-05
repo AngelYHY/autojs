@@ -54,6 +54,7 @@ module.exports = {
     baiduOcr: baiduOcr,
     setIntervalBySetTimeout: setIntervalBySetTimeout,
     classof: classof,
+    myCaptureScreen: myCaptureScreen,
     checkSdkAndAJVer: checkSdkAndAJVer,
 };
 
@@ -849,6 +850,9 @@ function killThisApp(name, params) {
         text(app.getAppName(name)).waitFor();
         let is_sure = textMatches(/(.*强制.*|.*停止.*|.*结束.*|.*运行.*)/).findOne(2000);
         log("停止" + is_sure);
+        if (!is_sure.enabled()) {
+            return true;
+        }
         // sleep(20000);
         // if (!is_sure) {
         //     log("强制停止。。。。");
@@ -2953,6 +2957,22 @@ function observeToastMessage(aim_app_pkg, aim_msg, timeout, aim_amount) {
     }
 }
 
+function myCaptureScreen() {
+    let _$$und = o => typeof o === "undefined";
+    let _capt = _$$und(images.permit) ? permitCapt : images.permit;
+    _capt();
+    let path = "/sdcard/capture/" + getTimeStr() + ".png";
+    files.createWithDirs(path);
+    images.captureScreen(path);
+}
+
+function getTimeStr() {
+    let now = new Date();
+    let padZero = num => (num < 10 ? "0" : "") + num;
+    return now.getFullYear() + padZero(now.getMonth() + 1) + padZero(now.getDate())
+        + padZero(now.getHours()) + padZero(now.getMinutes()) + padZero(now.getSeconds());
+}
+
 /**
  * Save current screen capture as a file with a key name and a formatted timestamp
  * @param key_name {string} - a key name as a clip of the file name
@@ -2975,12 +2995,7 @@ function captureErrScreen(key_name, log_level) {
 
     // tool function(s) //
 
-    function getTimeStr() {
-        let now = new Date();
-        let padZero = num => (num < 10 ? "0" : "") + num;
-        return now.getFullYear() + padZero(now.getMonth() + 1) + padZero(now.getDate())
-            + padZero(now.getHours()) + padZero(now.getMinutes()) + padZero(now.getSeconds());
-    }
+
 
     // raw function(s) //
 
@@ -3015,28 +3030,30 @@ function captureErrScreen(key_name, log_level) {
         return true;
     }
 
-    function permitCapt() {
-        let _$$isJvo = x => x && !!x["getClass"];
-        let _key = "_$_request_screen_capture";
-        let _fg = global[_key];
-        let _cwd = engines.myEngine().cwd();
-        let _path = _cwd + "/Modules/EXT_IMAGES.js";
 
-        if (files.exists(_path)) {
-            return require(_path).permit();
-        }
+}
 
-        if (_$$isJvo(_fg)) {
-            if (_fg) return true;
-            _fg.incrementAndGet();
-        } else {
-            global[_key] = threads.atomic(1);
-        }
+function permitCapt() {
+    let _$$isJvo = x => x && !!x["getClass"];
+    let _key = "_$_request_screen_capture";
+    let _fg = global[_key];
+    let _cwd = engines.myEngine().cwd();
+    let _path = _cwd + "/Modules/EXT_IMAGES.js";
 
-        images.requestScreenCapture(false);
-        sleep(300);
-        return true;
+    if (files.exists(_path)) {
+        return require(_path).permit();
     }
+
+    if (_$$isJvo(_fg)) {
+        if (_fg) return true;
+        _fg.incrementAndGet();
+    } else {
+        global[_key] = threads.atomic(1);
+    }
+
+    images.requestScreenCapture(false);
+    sleep(300);
+    return true;
 }
 
 /**

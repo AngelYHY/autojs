@@ -13,14 +13,14 @@ function MyUnlock() {
             let _ts = Date.now() + 300e3;
             let _par = { path: engines.myEngine().getSource().toString(), date: _ts };
             timers.addDisposableTask(_par);
-
-            exit();
+            // 结束正在运行的脚本
+            engines.stopAll();
         }
         if (device.isScreenOn()) {
             return;
         }
         log("需要亮屏");
-        //点亮屏幕
+        //点亮屏幕Í
         device.wakeUp();
         sleep(700);
 
