@@ -163,16 +163,16 @@ function start() {
     click(width / 2, height - 100);
     sleep(3000);
     log("跳过 确定");
-    let money = id("tv_quote").findOne(2000);
-    if (money) {
-        log("不为空。。。");
-        if (parseInt(money.text().replace(/,/g, "")) < 100) {
-            log("钱不多");
-            over(1);
-        }
-    } else {
-        over(0);
-    }
+    // let money = id("tv_quote").findOne(2000);
+    // if (money) {
+    //     log("不为空。。。");
+    //     if (parseInt(money.text().replace(/,/g, "")) < 100) {
+    //         log("钱不多");
+    //         over(1);
+    //     }
+    // } else {
+    //     over(0);
+    // }
     waitForAndClickAction(id("close_btn"), 4e3, 80);
     waitForAndClickAction(text("交易明细"), 4e3, 80);
     sleep(2000);
@@ -249,8 +249,8 @@ function go(half) {
         sleep(1000);
         swipe(swid, shei, ewid, ehei, 300);
     }
-    let r = null;
-    sleep(2000)
+
+    sleep(4000);
 
 
     // arr.forEach(element => {
@@ -276,97 +276,51 @@ function go(half) {
         log("freestar=00=" + zeroZero);
         let zeroOne = r.child(1).findOne(id("tv_profit")).text().replace(/%/g, "");
         let oneZero = r.child(4).findOne(id("tv_profit")).text().replace(/%/g, "");
+        // 3-0
+        let threeZero = r.child(12).findOne(id("tv_profit")).text().replace(/%/g, "");
+        // 0-3
+        let zeroThree = r.child(3).findOne(id("tv_profit")).text().replace(/%/g, "");
+        // 2-3
+        let twoThree = r.child(11).findOne(id("tv_profit")).text().replace(/%/g, "");
+        // 3-2
+        let threeTwo = r.child(14).findOne(id("tv_profit")).text().replace(/%/g, "");
         log("判断倍数");
         // 0-0 < 5 判定为大球
-        if (zeroZero < 5) {  // 大球  买小球
+        if (zeroZero < 5) {  // 大球  买小球 0-3  3-0
             // 0-1 > 1.5倍 1-0   买3-0
             if (zeroOne > 1.2 * oneZero) {
-
-                // // 3-0
-                let threeZero = r.child(12).findOne(id("tv_profit")).text().replace(/%/g, "");
-                // if (threeZero > 1) {
-                //     maid.clickCenter(r.child(12));
-                //     sleep(2000);
-                //     let pi = new ProfitInfo(12, 5);
-                //     bet(pi);
-                // }
-
-                // // 3-2
-                let threeTwo = r.child(14).findOne(id("tv_profit")).text().replace(/%/g, "");
-                // if (threeTwo > 1) {
-                //     maid.clickCenter(r.child(14));
-                //     sleep(2000);
-                //     let pi = new ProfitInfo(14, 5);
-                //     bet(pi);
-                // }
-
-                // if (threeZero > threeTwo && threeZero > 1.3) {
                 if (threeZero > 1.2) {
                     maid.clickCenter(r.child(12));
                     sleep(2000);
                     let pi = new ProfitInfo(12, 5);
                     bet(pi);
                 }
-
-                // } else if (threeTwo > threeZero && threeTwo > 1.3) {
-                //     maid.clickCenter(r.child(14));
-                //     sleep(2000);
-                //     let pi = new ProfitInfo(14, 5);
-                //     bet(pi);
-                // }
-
+            } else {
+                if (zeroThree > 1.2) {
+                    maid.clickCenter(r.child(3));
+                    sleep(2000);
+                    let pi = new ProfitInfo(3, 5);
+                    bet(pi);
+                }
             }
-        } else { // 小球买 买 大球
-            // 1-0 > 1.5 倍 0-1 买 0-3
+        } else { // 小球 买 大球  2-3  3-2
+            // 1-0 > 1.5 倍 0-1 买 2-3
             if (oneZero > 1.2 * zeroOne) {
-                // // 0-3
-                let zeroThree = r.child(3).findOne(id("tv_profit")).text().replace(/%/g, "");
-                // if (zeroThree > 1) {
-                //     maid.clickCenter(r.child(3));
-                //     sleep(2000);
-                //     let pi = new ProfitInfo(3, 5);
-                //     bet(pi);
-                // }
-
-                // // 2-3
-                let twoThree = r.child(11).findOne(id("tv_profit")).text().replace(/%/g, "");
-                // if (twoThree > 1) {
-                //     maid.clickCenter(r.child(11));
-                //     sleep(2000);
-                //     let pi = new ProfitInfo(11, 5);
-                //     bet(pi);
-                // }
-
-                // if (zeroThree > twoThree && zeroThree > 1.3) {
-                //     maid.clickCenter(r.child(3));
-                //     sleep(2000);
-                //     let pi = new ProfitInfo(3, 5);
-                //     bet(pi);
-                // } else if (twoThree > zeroThree && twoThree > 1.3) {
-                    
                 if (twoThree > 1.2) {
                     maid.clickCenter(r.child(11));
                     sleep(2000);
                     let pi = new ProfitInfo(11, 5);
                     bet(pi);
                 }
-
-                // }
-
+            } else {
+                if (threeTwo > 1.2) {
+                    maid.clickCenter(r.child(14));
+                    sleep(2000);
+                    let pi = new ProfitInfo(14, 5);
+                    bet(pi);
+                }
             }
         }
-
-
-        // 相差 1.3 倍就买 3-3
-        // if (zeroOne > 1.3 * oneZero || oneZero > 1.3 * zeroOne) {
-        //     let threeThree = r.child(15).findOne(id("tv_profit")).text().replace(/%/g, "");
-        //     if (threeThree > 1) {
-        //         maid.clickCenter(r.child(15));
-        //         sleep(2000);
-        //         let pi = new ProfitInfo(15, 9);
-        //         bet(pi);
-        //     }
-        // }
 
     }
 }
