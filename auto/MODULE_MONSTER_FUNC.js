@@ -2957,11 +2957,11 @@ function observeToastMessage(aim_app_pkg, aim_msg, timeout, aim_amount) {
     }
 }
 
-function myCaptureScreen() {
+function myCaptureScreen(name) {
     let _$$und = o => typeof o === "undefined";
     let _capt = _$$und(images.permit) ? permitCapt : images.permit;
     _capt();
-    let path = "/sdcard/capture/" + getTimeStr() + ".png";
+    let path = "/sdcard/capture/" + getTimeStr() + "--" + name + ".png";
     files.createWithDirs(path);
     images.captureScreen(path);
 }

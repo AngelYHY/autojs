@@ -62,6 +62,7 @@ var hour = obj.getHours();
 let buy = "";
 let halfLevel;
 
+let zeroZero;
 try {
     try {
         start();
@@ -163,16 +164,16 @@ function start() {
     click(width / 2, height - 100);
     sleep(3000);
     log("跳过 确定");
-    // let money = id("tv_quote").findOne(2000);
-    // if (money) {
-    //     log("不为空。。。");
-    //     if (parseInt(money.text().replace(/,/g, "")) < 100) {
-    //         log("钱不多");
-    //         over(1);
-    //     }
-    // } else {
-    //     over(0);
-    // }
+    let money = id("tv_quote").findOne(2000);
+    if (money) {
+        log("不为空。。。");
+        if (parseInt(money.text().replace(/,/g, "")) < 100) {
+            log("钱不多");
+            over(1);
+        }
+    } else {
+        over(0);
+    }
     waitForAndClickAction(id("close_btn"), 4e3, 80);
     waitForAndClickAction(text("交易明细"), 4e3, 80);
     sleep(2000);
@@ -240,7 +241,7 @@ function go(half) {
     let rvs = id("rv_predict_list").find();
     r = rvs.get(half);
 
-    let zeroZero = r.child(0).findOne(id("tv_profit")).text().replace(/%/g, "");
+    zeroZero = r.child(0).findOne(id("tv_profit")).text().replace(/%/g, "");
 
     log(arr + "数组");
     // back();
@@ -295,7 +296,7 @@ function go(half) {
                     let pi = new ProfitInfo(12, 5);
                     bet(pi);
                 }
-            } else {
+            } else if (oneZero > 1.2 * zeroOne) {
                 if (zeroThree > 1.2) {
                     maid.clickCenter(r.child(3));
                     sleep(2000);
@@ -312,7 +313,7 @@ function go(half) {
                     let pi = new ProfitInfo(11, 5);
                     bet(pi);
                 }
-            } else {
+            } else if (zeroOne > 1.2 * oneZero) {
                 if (threeTwo > 1.2) {
                     maid.clickCenter(r.child(14));
                     sleep(2000);
@@ -382,8 +383,8 @@ function bet(element) {
     }
     // 退出支付页面
     back();
-    sleep(12000);
-    myCaptureScreen();
+    sleep(10000);
+    myCaptureScreen(zeroZero);
     sleep(3000);
 }
 
